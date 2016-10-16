@@ -1,0 +1,7 @@
+Please note that the RPi3's internal  WiFi antenna is NOT currently operational. 
+Two blacklist comments were added to the file located at:
+/etc/modprobe.d/raspi-blacklist.conf 
+These two comments (blacklist brcmfmac AND blacklist brcmultil) disable the drivers for the RPi3's interal WiFi Adapter
+This was done to enure use of an external WiFi antenna for connectivity reasons. 
+
+~NAS CoD Engineering and Tech Club at NASA RMC 2016

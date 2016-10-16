@@ -1,0 +1,19 @@
+gethostbyname = Look up an IP address from a domain name (look up a person's telephone number)
+
+getservbyname = Look up a port number from a service name (look up a person's extension number)
+
+socket = create a socket (lift up the telephone handset)
+
+connect = connect to a given IP address and port number (dial the telephone number)
+
+bind = force the socket API to utilize a particular port or address. (doesn't really work with the telephone analogy, but this is used to tell the API which port number your socket will use on the local machine)
+
+listen = Tell the socket API that you wish to receive connections (switching on the "ringer" on your telephone)
+
+accept = Accept an incoming connection (answer a telephone call)
+
+send = send data out over a socket (talk into your telephone handset)
+
+recv = receive data from a socket (listen to your telephone handset)
+
+close = close a socket (hang up the telephone)
