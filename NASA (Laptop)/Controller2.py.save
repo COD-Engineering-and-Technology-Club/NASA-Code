@@ -6,10 +6,11 @@ import socket
 
 """Packet Meanings:
 	DR = Drive
-	ST = Steer
+	ST = Steer(Actuator)
 	AU = Auger
 	TI = Tilt(Actuators)
-	SL = Slide Rails"""
+	SL = BallsScrew Slide
+	CO = Conveyor"""
 
 if __name__ == '__main__':
 	
@@ -24,7 +25,7 @@ if __name__ == '__main__':
 		joystickNo = 0,
 		deadzone = 0.5,
 		scale = 1,
-		invertYAxis = False)
+		invertYAxis = True)
 
 	def ltxCall(val):
 		"""pwm takes val from -1 to 1
@@ -32,92 +33,141 @@ if __name__ == '__main__':
 		for GPIO ChangeDutyCycle"""
 		pwm = (val + 1)/.02
 		pwm = round(pwm,0)
+		if pwm > 90:
+			pwm = 90.0
+		elif pwm < 10:
+			pwm = 10.0
+
 		msg = "ST"+str(pwm)
 		print(msg)
 		data = msg.encode()
 		s.send(data)
 		return 0
 
-	def ltyCall(aValue):
-		pwm = (val + 1)/.02
-                pwm = round(pwm,0)
-                msg = "DR"+str(pwm)
-                print(msg)
-                data = msg.encode()
-                s.send(data)
-                return 0
-
-		return 0
-
-	def rtxCall(val):
-		return 0
+	def ltyCall(val):
 		pwm = (val + 1)/.02
 		pwm = round(pwm,0)
-		msg = ""+str(pwm)
-		print(msg)
-		send = msg.encode()
-		s.send(send)
+		if pwm > 90:
+			pwm = 90.0
+		elif pwm < 10:
+			pwm = 10.0
 
-	def rtyCall(aValue):
-		return 0
-
-	def rtrCall(val):        
-		pwm = (val + 1)/.02
-		pwm = round(pwm,0)
 		msg = "DR"+str(pwm)
 		print(msg)
 		send = msg.encode()
 		s.send(send)
 		return 0
-
-	def ltrCall(aValue):        
-		return 0
-    
-	def aCall(aValue):
-		pwm = (val + 1)/.02
+	
+	def rtxCall(val):
+                pwm = (val)/.02
 		pwm = round(pwm,0)
-		msg = "AU"+str(pwm)
+		if pwm > 90:
+			pwm = 90.0
+		elif pwm < 10:
+			pwm = 10.0
+		msg = "SL"+str(pwm)
 		print(msg)
 		send = msg.encode()
 		s.send(send)
 		return 0
 
-	def bCall(val):        
-		return 0
-    
-	def xCall(aValue):        
-		return 0
-    
-	def yCall(aValue):        
-		return 0
-    
-	def lbCall(aValue):        
-		return 0
-    
-	def rbCall(aValue):        
-		return 0
-    
-	def bckCall(aValue):        
-		return 0
-    
-	def strCall(aValue):        
-		return 0
-    
-	def xbCall(aValue):        
-		return 0
-    
-	def ltCall(aValue):        
-		return 0
-    
-	def rtCall(aValue):        
+	def rtyCall(val):
+                pwm = (-1*val + 1)/.02
+		pwm = round(pwm,0)
+		if pwm > 90:
+			pwm = 90.0
+		elif pwm < 10:
+			pwm = 10.0
+		msg = "SL"+str(pwm)
+		print(msg)
+		send = msg.encode()
+		s.send(send)
 		return 0
 
+	def rtrCall(val):        
+		pwm = (-1*val + 1)/.02
+		pwm = round(pwm,0)
+		if pwm > 90:
+			pwm = 90.0
+		elif pwm < 10:
+			pwm = 10.0
+		msg = "SL"+str(pwm)
+		print(msg)
+		send = msg.encode()
+		s.send(send)
+		return 0
+
+	def ltrCall(val):
+		return 0
+
+        def aCall(val):
+                if val != 0:
+                        pwm = 10.0
+                        msg = "AU"+str(pwm)
+                        print(msg)
+                        send = msg.encode()
+                        s.send(send)
+                        return 0
+	
+	def bCall(val):
+                if val != 0:
+                        pwm = 90.0
+                        msg = "AU"+str(pwm)
+                        print(msg)
+                        send = msg.encode()
+                        s.send(send)
+                        return 0
+    
+	def xCall(val):
+                if val != 0:
+                        pwm = 90.0
+                        msg = "CO"+str(pwm)
+                        print(msg)
+                        send = msg.encode()
+                        s.send(send)
+                        return 0
+    
+	def yCall(val):        
+		return 0
+    
+	def lbCall(val):
+                if val != 0:
+                        pwm = 90.0
+                        msg = "TI"+str(pwm)
+                        print(msg)
+                        send = msg.encode()
+                        s.send(send)
+        
+		return 0
+    
+	def rbCall(val):
+                if val != 0:
+                        pwm = 10.0
+                        msg = "TI"+str(pwm)
+                        print(msg)
+                        send = msg.encode()
+                        s.send(send)
+		return 0
+    
+	def bckCall(val):        
+		return 0
+    
+	def strCall(val):        
+		return 0
+    
+	def xbCall(val):        
+		return 0
+
+
+
+
+
+	
+    
 	xboxCont.setupControlCallback(xboxCont.XboxControls.LTHUMBX, ltxCall)
 	xboxCont.setupControlCallback(xboxCont.XboxControls.LTHUMBY, ltyCall)
-	xboxCont.setupControlCallback(xboxCont.XboxControls.RTHUMBX, rtxCall)
+#	xboxCont.setupControlCallback(xboxCont.XboxControls.RTHUMBX, rtxCall)
 	xboxCont.setupControlCallback(xboxCont.XboxControls.RTHUMBY, rtyCall)
-	xboxCont.setupControlCallback(xboxCont.XboxControls.RTRIGGER, rtrCall)
-	xboxCont.setupControlCallback(xboxCont.XboxControls.LTRIGGER, ltrCall)
 	xboxCont.setupControlCallback(xboxCont.XboxControls.A, aCall)
 	xboxCont.setupControlCallback(xboxCont.XboxControls.B, bCall)
 	xboxCont.setupControlCallback(xboxCont.XboxControls.X, xCall)
@@ -127,8 +177,8 @@ if __name__ == '__main__':
 	xboxCont.setupControlCallback(xboxCont.XboxControls.BACK, bckCall)
 	xboxCont.setupControlCallback(xboxCont.XboxControls.START, strCall)
 	xboxCont.setupControlCallback(xboxCont.XboxControls.XBOX, xbCall)
-	xboxCont.setupControlCallback(xboxCont.XboxControls.LEFTTHUMB, ltCall)
-	xboxCont.setupControlCallback(xboxCont.XboxControls.RIGHTTHUMB, rtCall)
+#	xboxCont.setupControlCallback(xboxCont.XboxControls.RTRIGGER, rtrCall)
+#	xboxCont.setupControlCallback(xboxCont.XboxControls.LTRIGGER, ltrCall)
 
 	try:
 		xboxCont.start()
