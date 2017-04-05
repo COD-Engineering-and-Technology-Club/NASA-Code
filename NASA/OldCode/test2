@@ -1,3 +1,0 @@
-nigga = "DR150"
-print nigga[4:4]
-print nigga[2:5]
