@@ -79,7 +79,7 @@ if __name__ == '__main__':
 		s.send(send)
 		return 0
 
-	def rtyCall(val):
+    def rtyCall(val):
                 pwm = (-1*val + 1)/.02
 		pwm = round(pwm,0)
 		if pwm > 90:
