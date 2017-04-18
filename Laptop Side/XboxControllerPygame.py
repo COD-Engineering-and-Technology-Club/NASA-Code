@@ -50,7 +50,7 @@ def main():
             if event.type == pygame.JOYBUTTONDOWN or event.type == pygame.JOYAXISMOTION:
                 #Steering command on the top left axis left and right direction
                 if joystick.get_axis(0) > .1 or joystick.get_axis(0) < -.1:
-                    pwm = (joystick.get_axis(0)) + 1 / .02
+                    pwm = (joystick.get_axis(0) + 1) / .02
                     pwm = round(pwm,0)
                     if pwm > 90:
                         pwm = 90.0
