@@ -29,6 +29,9 @@
     <Compile Include="Laptop Side\Controller3.py" />
     <Compile Include="Laptop Side\Wifi.py" />
     <Compile Include="Laptop Side\XboxController.py" />
+    <Compile Include="Laptop Side\XboxControllerPygame.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="new.py" />
     <Compile Include="Pi Side\final.py" />
     <Compile Include="Pi Side\XboxController.py" />
