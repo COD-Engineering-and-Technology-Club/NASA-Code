@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{86010557-7677-4529-a389-c967ba0f7976}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>instructserver.py</StartupFile>
+    <StartupFile>Laptop Side\XboxControllerPygame.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -27,6 +27,9 @@
     <Compile Include="instructserver.py" />
     <Compile Include="Laptop Side\Controller2.py" />
     <Compile Include="Laptop Side\Controller3.py" />
+    <Compile Include="Laptop Side\JoystickGui.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Laptop Side\Wifi.py" />
     <Compile Include="Laptop Side\XboxController.py" />
     <Compile Include="Laptop Side\XboxControllerPygame.py">
