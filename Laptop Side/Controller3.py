@@ -10,27 +10,35 @@ import socket
 	AU = Auger
 	TI = Tilt(Actuators)
 	SL = BallsScrew Slide
-	CO = Conveyor"""
+	CO = Conveyor
+   Callback Funct. Meanings:
+	ltx,lty = Left Thumbstick X axis or Y axis
+	"""
 
 if __name__ == '__main__':
-	
+#establishing socket connections	
 	HOST='192.168.1.125'
 	PORT=9500
 	s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	s.connect((HOST, PORT))
 	
-
+#instantiates the generic xbox Controller settings 
 	xboxCont = XboxController.XboxController(
 		controllerCallBack = None,
 		joystickNo = 0,
 		deadzone = 0.5,
+#deadzone controls the sensitivity(minimum value the controller should pick up on)
 		scale = 1,
+#scale controlls map and constrain
+#Ex. when scale = 1, takes whatever input from controller and change values to
+#something between -1 and 1
 		invertYAxis = True)
 
 	def ltxCall(val):
-		"""pwm takes val from -1 to 1
-		and changes it from 1 to 100
-		for GPIO ChangeDutyCycle"""
+#pwm takes val from -1 to 1
+#and changes it from 1 to 100 for GPIO ChangeDutyCycle
+#might seem redundant to first set scale to 1, but by default it will consider
+#negative values.
 		pwm = (val + 1)/.02
 		pwm = round(pwm,0)
 		if pwm > 90:
@@ -102,7 +110,7 @@ if __name__ == '__main__':
 
         def aCall(val):
                 if val != 0:
-                        pwm = 10.0
+                        pwm = 90.0
                         msg = "AU"+str(pwm)
                         print(msg)
                         send = msg.encode()
@@ -111,7 +119,7 @@ if __name__ == '__main__':
 	
 	def bCall(val):
                 if val != 0:
-                        pwm = 90.0
+                        pwm = 10.0
                         msg = "AU"+str(pwm)
                         print(msg)
                         send = msg.encode()
@@ -132,7 +140,7 @@ if __name__ == '__main__':
     
 	def lbCall(val):
                 if val != 0:
-                        pwm = 90.0
+                        pwm = 10.0
                         msg = "TI"+str(pwm)
                         print(msg)
                         send = msg.encode()
@@ -142,7 +150,7 @@ if __name__ == '__main__':
     
 	def rbCall(val):
                 if val != 0:
-                        pwm = 10.0
+                        pwm = 90.0
                         msg = "TI"+str(pwm)
                         print(msg)
                         send = msg.encode()
@@ -186,7 +194,7 @@ if __name__ == '__main__':
 		#How long you want before it asks for new info from xbox
 		while True:
 			time.sleep(.05)
-
+#exception handling
 	except KeyboardInterrupt:
 		print("User cancelled")
 	except:
