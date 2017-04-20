@@ -36,7 +36,7 @@ def main():
     PORT=9500
     s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
-    print("Connection to"+HOST+"was successful")
+    print("Connection to" + HOST + "was successful")
 
     pygame.init()
     #use first joystick connected since only
@@ -119,14 +119,14 @@ def main():
                     s.send(send)
                 
                 #Drive command using top left stick up and down
-                if joystick.get_axis(1) <-.1 or joystick.get_axis(1)>.1:
+                if joystick.get_axis(1) <-.1 or joystick.get_axis(1) > .1:
                     pwm = (joystick.get_axis(1) + 1) / .02      
                     pwm = round(pwm,0)
                     if pwm > 90:
                         pwm = 90.0
                     elif pwm < 10:
                         pwm = 10.0
-                    msg = "DR"+str(pwm)
+                    msg = "DR" + str(pwm)
                     print(msg)
                     send = msg.encode()
                     s.send(send)
