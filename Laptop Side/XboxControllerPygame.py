@@ -10,8 +10,6 @@ import pygame
 	TI = Tilt(Actuators)
 	SL = BallsScrew Slide
 	CO = Conveyor
-   Callback Funct. Meanings:
-	ltx,lty = Left Thumbstick X axis or Y axis
 	"""
 
 def stop():
