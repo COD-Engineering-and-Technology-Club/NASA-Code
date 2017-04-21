@@ -16,7 +16,6 @@ def stop():
         pygame.joystick.quit()
         pygame.quit()
         print("Clean exit")
-        s.close()
         exit(0)
 
 def main():
@@ -30,16 +29,17 @@ def main():
     running = True
 
     #Establish socket connections	
-    HOST='192.168.1.125'
+    HOST='192.168.1.18'
     PORT=9500
     s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
-    print("Connection to" + HOST + "was successful")
+    print("Connection to " + HOST + " was successful")
 
     pygame.init()
     #use first joystick connected since only
     #one xbox remote is used
     joystick = pygame.joystick.Joystick(0)
+    print("joystick")
     #initailize joystick
     joystick.init()
     
@@ -134,5 +134,6 @@ def main():
                     running = False
 
     print("Stopping")
+    s.close()
     stop()
 main()
