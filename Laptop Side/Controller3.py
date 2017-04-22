@@ -67,7 +67,7 @@ if __name__ == '__main__':
 		return 0
 	
 	def rtxCall(val):
-                pwm = (val)/.02
+        pwm = (val)/.02
 		pwm = round(pwm,0)
 		if pwm > 90:
 			pwm = 90.0
@@ -79,8 +79,8 @@ if __name__ == '__main__':
 		s.send(send)
 		return 0
 
-	def rtyCall(val):
-                pwm = (-1*val + 1)/.02
+    def rtyCall(val):
+        pwm = (-1*val + 1)/.02
 		pwm = round(pwm,0)
 		if pwm > 90:
 			pwm = 90.0
@@ -109,13 +109,13 @@ if __name__ == '__main__':
 		return 0
 
         def aCall(val):
-                if val != 0:
-                        pwm = 90.0
-                        msg = "AU"+str(pwm)
-                        print(msg)
-                        send = msg.encode()
-                        s.send(send)
-                        return 0
+            if val != 0:
+                pwm = 90.0
+            msg = "AU"+str(pwm)
+            print(msg)
+            send = msg.encode()
+            s.send(send)
+            return 0
 	
 	def bCall(val):
                 if val != 0:
