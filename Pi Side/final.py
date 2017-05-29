@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import socket
-import RPi.GPIO as GPIO
+
 PORT=9500
 s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('', PORT))
@@ -9,9 +9,6 @@ s.listen(1)
 s.setsockopt(socket.IPPROTO_TCP , socket.TCP_NODELAY , 1 )
 conn, addr = s.accept()
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(05, GPIO.OUT)
 GPIO.setup(06, GPIO.OUT)
 GPIO.setup(13, GPIO.OUT)
 GPIO.setup(19, GPIO.OUT)

@@ -28,6 +28,8 @@ if __name__ == '__main__':
 		invertYAxis = True)
 
 	def ltxCall(val):
+        #steer the robot
+        #I'm assuming that the val is just a one or a zero
 		"""pwm takes val from -1 to 1
 		and changes it from 1 to 100
 		for GPIO ChangeDutyCycle"""
@@ -45,6 +47,7 @@ if __name__ == '__main__':
 		return 0
 
 	def ltyCall(val):
+        #drive
 		pwm = (val + 1)/.02
 		pwm = round(pwm,0)
 		if pwm > 90:
@@ -59,6 +62,7 @@ if __name__ == '__main__':
 		return 0
 	
 	def rtxCall(val):
+        #BallScrew Slide
                 pwm = (val)/.02
 		pwm = round(pwm,0)
 		if pwm > 90:
@@ -72,6 +76,7 @@ if __name__ == '__main__':
 		return 0
 
 	def rtyCall(val):
+        #BallScrew Slide down?
                 pwm = (-1*val + 1)/.02
 		pwm = round(pwm,0)
 		if pwm > 90:
@@ -84,7 +89,8 @@ if __name__ == '__main__':
 		s.send(send)
 		return 0
 
-	def rtrCall(val):        
+	def rtrCall(val):
+        #BallScrew Slide
 		pwm = (-1*val + 1)/.02
 		pwm = round(pwm,0)
 		if pwm > 90:
@@ -98,6 +104,7 @@ if __name__ == '__main__':
 		return 0
 
 	def ltrCall(val):
+        #Ballscrew slide
 #                pwm = (val + 1)/.02
 #		pwm = round(pwm,0)
 #		if pwm > 90:
@@ -110,53 +117,58 @@ if __name__ == '__main__':
 #		s.send(send)
 		return 0
 
-        def aCall(val):
-                if val != 0:
-                        pwm = 90.0
-                        msg = "AU"+str(pwm)
-                        print(msg)
-                        send = msg.encode()
-                        s.send(send)
-                        return 0
+    def aCall(val):
+    #auger
+        if val != 0:
+            pwm = 90.0
+            msg = "AU"+str(pwm)
+            print(msg)
+            send = msg.encode()
+            s.send(send)
+            return 0
+        #this currently returns nothing if the val is not zero is that correct?
 	
 	def bCall(val):
-                if val != 0:
-                        pwm = 10.0
-                        msg = "AU"+str(pwm)
-                        print(msg)
-                        send = msg.encode()
-                        s.send(send)
-                        return 0
+    #auger
+        if val != 0:
+            pwm = 10.0
+            msg = "AU"+str(pwm)
+            print(msg)
+            send = msg.encode()
+            s.send(send)
+            return 0
     
 	def xCall(val):
-                if val != 0:
-                        pwm = 90.0
-                        msg = "CO"+str(pwm)
-                        print(msg)
-                        send = msg.encode()
-                        s.send(send)
-                        return 0
+    #conveyor
+        if val != 0:
+            pwm = 90.0
+            msg = "CO"+str(pwm)
+            print(msg)
+            send = msg.encode()
+            s.send(send)
+            return 0
     
 	def yCall(val):        
 		return 0
     
 	def lbCall(val):
-                if val != 0:
-                        pwm = 10.0
-                        msg = "TI"+str(pwm)
-                        print(msg)
-                        send = msg.encode()
-                        s.send(send)
-        
+    #tilt
+        if val != 0:
+            pwm = 10.0
+            msg = "TI"+str(pwm)
+            print(msg)
+            send = msg.encode()
+            s.send(send)
 		return 0
     
 	def rbCall(val):
-                if val != 0:
-                        pwm = 90.0
-                        msg = "TI"+str(pwm)
-                        print(msg)
-                        send = msg.encode()
-                        s.send(send)
+    #tilt
+        if val != 0:
+            pwm = 90.0
+            msg = "TI"+str(pwm)
+            print(msg)
+            send = msg.encode()
+            s.send(send)
 		return 0
     
 	def bckCall(val):        
@@ -172,7 +184,7 @@ if __name__ == '__main__':
 
 
 
-	
+##links buttons to the above functions
     
 	xboxCont.setupControlCallback(xboxCont.XboxControls.LTHUMBX, ltxCall)
 	xboxCont.setupControlCallback(xboxCont.XboxControls.LTHUMBY, ltyCall)
@@ -189,6 +201,8 @@ if __name__ == '__main__':
 	xboxCont.setupControlCallback(xboxCont.XboxControls.XBOX, xbCall)
 #	xboxCont.setupControlCallback(xboxCont.XboxControls.RTRIGGER, rtrCall)
 #	xboxCont.setupControlCallback(xboxCont.XboxControls.LTRIGGER, ltrCall)
+
+##tests...
 
 	try:
 		xboxCont.start()
